@@ -1,13 +1,14 @@
 import { useState } from "react";
 
-export const TaskCreate = () => {
-    
+export const TaskCreate = ({ createNewTask }) => {
   //use state to save the value
-  const [newTask, setnewTask] = useState();
+  const [newTask, setnewTask] = useState("");
   //function for submit a value
   const HandleSubmit = (e) => {
     //previene elcomportamiento por defecto de vaciar el input
     e.preventDefault();
+    //call function in app.jsx
+    createNewTask(newTask);
     //save the value in localstorage
     localStorage.setItem("task", newTask);
     //reset the input task
