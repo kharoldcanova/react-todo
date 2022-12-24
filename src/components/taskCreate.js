@@ -9,8 +9,6 @@ export const TaskCreate = ({ createNewTask }) => {
     e.preventDefault();
     //call function in app.jsx
     createNewTask(newTask);
-    //save the value in localstorage
-    localStorage.setItem("task", newTask);
     //reset the input task
     setnewTask("");
   };
