@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./styles/index.css";
 import { TaskCreate } from "./components/taskCreate";
 import { useState } from "react";
+import { TaskTable } from './components/taskTable'
 
 //main function
 function App() {
@@ -13,6 +14,13 @@ function App() {
     settaskItem([...taskItem, {name: taskName, done: false}])
    }
   }
+
+  const toggleTask = (task) => {
+    settaskItem(
+      taskItem.map((t) => (t.name === task.name ? { ...t, done: !t.done } : t))
+    );
+  };
+
   //when the app load
   useEffect(() => {
     let data = localStorage.getItem("tasks");
@@ -24,25 +32,10 @@ function App() {
   useEffect(()=>{
     localStorage.setItem('tasks', JSON.stringify(taskItem))
   }, [taskItem])
+
   return <div className="App">
     <TaskCreate createNewTask={createNewTask} />
-    <table>
-      <thead>
-        <tr>
-          <th>Tasks</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-        taskItem.map(task =>(
-          <tr key={task.name}>
-     <td>       {task.name}</td>
-          </tr>
-        ))
-      }
-      </tbody>
-    </table>
-    
+    <TaskTable tasks={taskItem} toggleTask={toggleTask} />
   </div>
   
 }
