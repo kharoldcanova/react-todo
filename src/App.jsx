@@ -3,6 +3,7 @@ import "./styles/index.css";
 import { TaskCreate } from "./components/taskCreate";
 import { useState } from "react";
 import { TaskTable } from './components/taskTable'
+import { VisibilityControl } from "./components/visibilityControl";
 
 //main function
 function App() {
@@ -36,6 +37,12 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(taskItem))
   }, [taskItem])
 
+  //delete task
+  const cleanTasks = ()=>{
+    settaskItem(taskItem.filter(task => !task.done))
+    setshowCompleted(false)
+  }
+
   return (
     <div className="App">
       {/* input to create task */}
@@ -44,13 +51,11 @@ function App() {
       <TaskTable tasks={taskItem} toggleTask={toggleTask} />
 
       {/* check for show task table done */}
-      <div>
-        <input
-          type="checkbox"
-          onChange={() => setshowCompleted(!showCompleted)}
-        />
-        <label>Mostrar tareas realizadas</label>
-      </div>
+      <VisibilityControl
+      isChecked={showCompleted}
+      setshowCompleted={(checked)=>setshowCompleted(checked)}
+      cleanTasks={cleanTasks}
+      />
 
       {/* only show if the check is marked */}
       {showCompleted === true && (
