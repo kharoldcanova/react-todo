@@ -14,18 +14,24 @@ export const TaskCreate = ({ createNewTask }) => {
   };
 
   return (
-    <div className="App">
-      <form onSubmit={HandleSubmit}>
+    <form onSubmit={HandleSubmit} className="my-2 row">
+      {/*text input */}
+      <div className="col-9">
         <input
           type="text"
           placeholder="Ingresa una nueva tarea"
           //send to method
           value={newTask}
           onChange={(e) => setnewTask(e.target.value)}
+          className="form-control"
         />
-        {/*Show the value  */}
-        <button>Guardar</button>
-      </form>
-    </div>
+      </div>
+      {/*buttom to save */}
+      <div className="col-3">
+      <button 
+      className="btn btn-primary">
+        Guardar</button>
+      </div>
+    </form>
   );
 };

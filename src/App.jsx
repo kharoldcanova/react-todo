@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import "./styles/index.css";
 import { TaskCreate } from "./components/taskCreate";
 import { useState } from "react";
 import { TaskTable } from './components/taskTable'
 import { VisibilityControl } from "./components/visibilityControl";
+import {Container} from './components/container'
 
 //main function
 function App() {
@@ -44,28 +44,32 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <main className="bg-dark vh-100 text-white">
+     <Container>
       {/* input to create task */}
       <TaskCreate createNewTask={createNewTask} />
-      {/* task table */}
-      <TaskTable tasks={taskItem} toggleTask={toggleTask} />
+        {/* task table */}
+        <TaskTable tasks={taskItem} toggleTask={toggleTask} />
 
-      {/* check for show task table done */}
-      <VisibilityControl
-      isChecked={showCompleted}
-      setshowCompleted={(checked)=>setshowCompleted(checked)}
-      cleanTasks={cleanTasks}
-      />
-
-      {/* only show if the check is marked */}
-      {showCompleted === true && (
-        <TaskTable
-          tasks={taskItem}
-          toggleTask={toggleTask}
-          showCompleted={showCompleted}
+        {/* check for show task table done */}
+        <VisibilityControl
+          isChecked={showCompleted}
+          setshowCompleted={(checked) => setshowCompleted(checked)}
+          cleanTasks={cleanTasks}
         />
-      )}
-    </div>
+
+        {/* only show if the check is marked */}
+        {showCompleted === true && (
+          <TaskTable
+            tasks={taskItem}
+            toggleTask={toggleTask}
+            showCompleted={showCompleted}
+          />
+        )}
+
+     </Container>
+        
+    </main>
   );
   
 }
